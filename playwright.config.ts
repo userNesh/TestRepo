@@ -93,7 +93,7 @@ const config: PlaywrightTestConfig = {
     ],
     timeout: 1200*1000,
     use: {
-        headless:false,
+        headless:true,
         trace:'on',
         baseURL: process.env.URL!,
         extraHTTPHeaders: {
