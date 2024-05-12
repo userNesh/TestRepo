@@ -84,7 +84,7 @@ require('dotenv').config()
 const config: PlaywrightTestConfig = {
     workers:1,
     testDir:'src',
-    reporter:[['html', { open: 'always'}]],
+
     projects:[
         {
             name: 'Microsoft Edge',
@@ -92,8 +92,9 @@ const config: PlaywrightTestConfig = {
         }
     ],
     timeout: 1200*1000,
+    reporter:[['html', { open: 'always'}]],
     use: {
-        headless:false,
+        headless:true,
         trace:'on',
         baseURL: process.env.URL!,
         extraHTTPHeaders: {
