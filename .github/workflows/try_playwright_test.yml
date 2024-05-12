@@ -19,8 +19,12 @@ jobs:
       # run: ng serve
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
-    - name: Run Playwright tests
+    - name: Run Playwright test1
       run: npx playwright test create.user.spec.ts
+
+    - name: Run Playwright test2
+      run: npx playwright test get.user.and.assign.parking.spec.ts
+      
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
