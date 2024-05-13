@@ -1,1 +1,1 @@
-// This config file is added for future BDD test implementation
+// This config file is added for future BDD test implementations
