@@ -3,13 +3,11 @@ import { LoginClient } from '../clients/auth/login.client'
 import { User } from './user'
 
 let accessToken: string
-let passedToken: string
 const loginClient = new LoginClient()
 
 export type variables = {
     clientCredentialsObject :JSON
     accessToken: string
-    passedToken: string
     user: User
 }
 
@@ -26,12 +24,6 @@ export const test =  baseTest.extend<variables>({
         const array = JSON.parse(JSON.stringify(clientCredentialsObject))
         accessToken = array.token
         await use(accessToken)
-    },
-    passedToken: async ({request}, use) => {
-        const clientCredentialsObject = await loginClient.loggedOut()
-        const array = JSON.parse(JSON.stringify(clientCredentialsObject))
-        passedToken = array.token
-        await use(passedToken)
     },
     user: async ({request}, use) => {
         await use(user)
