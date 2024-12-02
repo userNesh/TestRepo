@@ -38,21 +38,6 @@ export class LoginClient {
         // const identityToken = loginResponseJson.token
         return loginResponseJson
     }
-
-    
-
-    // public async fetchCompanyUserPerId(
-    //     userId: string
-    // ): Promise<APIResponse> {
-    //     const apiContext: APIRequestContext = await request.newContext()
-    //     return await apiContext.get(
-    //         `${MOCK_URL}/api/users/${userId}`,
-    //         {
-    //             headers: {
-    //                 athorization: 'Bearer $(this.accessToken)'
-    //             }
-    //         }
-    //     )
-    // }
+9
 
 }
