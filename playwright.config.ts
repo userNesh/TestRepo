@@ -94,8 +94,8 @@ const config: PlaywrightTestConfig = {
     timeout: 1200*1000,
     reporter:[['html', { open: 'always'}]],
     use: {
-        headless:true,
-        trace:'on',
+        headless:false,
+        // trace:'on',
         baseURL: process.env.URL!,
         extraHTTPHeaders: {
             Accept: 'application/json',
