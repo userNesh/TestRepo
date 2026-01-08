@@ -7,42 +7,44 @@ import { ParkingClient } from "../clients/parking/parking.client";
 import { ParkingSpotRequest } from "../clients/parking/contracts/parking.spot.request";
 import { ParkingSpotResponse } from "../clients/parking/contracts/parking.spot.response";
 
-test('should fetch users and get id of user named Petar', async ({
-    accessToken, user
-}) => {
+test.describe.serial('Sequential REST API tests', () => {
+    test('should fetch users and get id of user named Petar', async ({
+        accessToken, user
+    }) => {
 
-    const userClient = new CompanyUserClient(accessToken)
+        const userClient = new CompanyUserClient(accessToken)
 
-    const response = await userClient.fetchCompanyUsers()
-    expect.soft(response.ok()).toBeTruthy();
-    const readResponse: BasicUserResponse = await response.json()
-    expect.soft(readResponse.totalNumber).toEqual(2)
-    expect.soft(readResponse.results[1].name).toEqual('Petar')
+        const response = await userClient.fetchCompanyUsers()
+        expect.soft(response.ok()).toBeTruthy();
+        const readResponse: BasicUserResponse = await response.json()
+        expect.soft(readResponse.totalNumber).toEqual(2)
+        expect.soft(readResponse.results[1].name).toEqual('Petar')
 
 
-    const entitiesList = await response.json()
-    for (const founduser of entitiesList.results){
-        if (founduser.name === 'Petar'){
-            user.id = founduser.id
-            expect(typeof user.id).toBe("number");
-            expect(user.id).toBeGreaterThan(0);            
+        const entitiesList = await response.json()
+        for (const founduser of entitiesList.results){
+            if (founduser.name === 'Petar'){
+                user.id = founduser.id
+                expect(typeof user.id).toBe("number");
+                expect(user.id).toBeGreaterThan(0);            
+            }
         }
-    }
 
-})
-test('should assign Parking Slot to userId', async ({
-    accessToken, user
-}) => {
+    })
+    test('should assign Parking Slot to userId', async ({
+        accessToken, user
+    }) => {
 
-    const parkingClient = new ParkingClient(accessToken)
+        const parkingClient = new ParkingClient(accessToken)
 
-    const parkingSpotRequest = new ParkingSpotRequest(
-        user.id,
-        true
-    )
-    const response = await parkingClient.addParkingSpot(parkingSpotRequest)
-    expect.soft(response.ok()).toBeTruthy();
-    const readResponse: ParkingSpotResponse = await response.json()
-    expect.soft(readResponse.parkingSlot).not.toEqual('')
+        const parkingSpotRequest = new ParkingSpotRequest(
+            user.id,
+            true
+        )
+        const response = await parkingClient.addParkingSpot(parkingSpotRequest)
+        expect.soft(response.ok()).toBeTruthy();
+        const readResponse: ParkingSpotResponse = await response.json()
+        expect.soft(readResponse.parkingSlot).not.toEqual('')
 
+    })
 })
