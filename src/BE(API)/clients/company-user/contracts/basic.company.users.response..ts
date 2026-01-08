@@ -1,11 +1,11 @@
 import { UserResponse } from './company.user.response'
 
 export class BasicUserResponse{
-    results: UserResponse
+    results: UserResponse[] = []
     totalNumber: number
 
     constructor(
-        results: UserResponse,
+        results: UserResponse[] = [],
         totalNumber: number
     ){
         this.results = results

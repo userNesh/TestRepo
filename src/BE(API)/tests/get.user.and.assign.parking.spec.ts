@@ -14,6 +14,7 @@ test('should fetch users and get id of user named Petar', async ({
     const userClient = new CompanyUserClient(accessToken)
 
     const response = await userClient.fetchCompanyUsers()
+    expect.soft(response.ok()).toBeTruthy();
     const readResponse: BasicUserResponse = await response.json()
     expect.soft(readResponse.totalNumber).toEqual(2)
     expect.soft(readResponse.results[1].name).toEqual('Petar')
@@ -23,9 +24,10 @@ test('should fetch users and get id of user named Petar', async ({
     for (const founduser of entitiesList.results){
         if (founduser.name === 'Petar'){
             user.id = founduser.id
+            expect(typeof user.id).toBe("number");
+            expect(user.id).toBeGreaterThan(0);            
         }
     }
-    expect.soft(user.id).not.toEqual('')
 
 })
 test('should assign Parking Slot to userId', async ({
@@ -39,6 +41,7 @@ test('should assign Parking Slot to userId', async ({
         true
     )
     const response = await parkingClient.addParkingSpot(parkingSpotRequest)
+    expect.soft(response.ok()).toBeTruthy();
     const readResponse: ParkingSpotResponse = await response.json()
     expect.soft(readResponse.parkingSlot).not.toEqual('')
 
